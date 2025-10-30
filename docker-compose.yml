@@ -1,15 +1,16 @@
-version: "3.9"
+# Add at the very top of docker-compose.yml
+name: predictist-trendbot
 
 services:
   predictist-trendbot-db:
     image: timescale/timescaledb:latest-pg15
     container_name: predictist-trendbot-db
+    ports:
+      - "5434:5432"        # changed from 5432:5432
     environment:
       - POSTGRES_USER=predictist
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=predictist
-    ports:
-      - "5434:5432"
     volumes:
       - ./db_data:/var/lib/postgresql/data
     healthcheck:
