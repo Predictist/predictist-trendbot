@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  predictist-trendbot-db:
+    image: timescale/timescaledb:latest-pg15
+    container_name: predictist-trendbot-db
+    environment:
+      - POSTGRES_USER=predictist
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=predictist
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U predictist"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  predictist-trendbot-api:
+    build: .
+    container_name: predictist-trendbot-api
+    environment:
+      - DATABASE_URL=postgresql+psycopg://predictist:password@predictist-trendbot-db:5432/predictist
+      - POLYMARKET_MODE=gamma
+    ports:
+      - "8081:8081"
+    depends_on:
+      predictist-trendbot-db:
+        condition: service_healthy
+    command: >
+      uvicorn app.api.trendbot_api:app --host 0.0.0.0 --port 8081 --reload
