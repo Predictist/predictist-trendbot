@@ -23,7 +23,7 @@ services:
     build: .
     container_name: predictist-trendbot-api
     environment:
-      - DATABASE_URL=postgresql+psycopg://predictist:password@predictist-trendbot-db:5432/predictist
+      - DATABASE_URL=postgresql://predictist:password@predictist-trendbot-db:5432/predictist
       - POLYMARKET_MODE=gamma
     ports:
       - "8081:8081"
