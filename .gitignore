@@ -1,1 +1,55 @@
+# =========================================
+# Predictist TrendBot – Clean Git Ignore
+# =========================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+*.egg-info/
+*.egg
+.env
+.venv/
+venv/
+.Python
+
+# --- Docker / Database ---
 db_data/
+*.pid
+*.sock
+*.swp
+
+# --- Node / Frontend (if ever added) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- IDE / Editor files ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- System / OS files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Build / Cache ---
+dist/
+build/
+*.bak
+*.tmp
+*.cache/
+__pycache__/
+.pytest_cache/
+
+# --- Misc ---
+.env.local
+.env.development
+.env.production
+.env.test
+*.coverage
