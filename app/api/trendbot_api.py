@@ -24,3 +24,7 @@ async def api_timeline(market_uid: str):
 @app.get("/api/trendbot/markets")
 async def api_markets(search: str):
     return await search_markets(search)
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok", "message": "TrendBot API running"}
